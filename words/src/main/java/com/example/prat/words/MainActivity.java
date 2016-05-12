@@ -39,10 +39,25 @@ public class MainActivity extends AppCompatActivity {
                 container.removeAllViews();
 
                 TextView tmp = new TextView(MainActivity.this);
+                int start = 1;
+                int end = 10;
+                Iterator iterator = result.keySet().iterator();
 
-                // Print result in a text view
-                for(String key: result.keySet()){
-                    tmp.append(key+" ,"+result.get(key)+"\n");
+                // Print result in groups in a text view
+                tmp.append(start+"-"+end+"\n");
+                while(iterator.hasNext()){
+                    String key = (String) iterator.next();
+                    int value = result.get(key);
+
+                    if(value>=start && value<=end){
+                        tmp.append(key + " ," + value + "\n");
+                    } else if(value>end) {
+                        start+=10;
+                        end+=10;
+                        tmp.append("\n"+start+"-"+end+"\n");
+                        tmp.append(key + " ," + value + "\n");
+                        continue;
+                    }
                 }
 
                 container.addView(tmp);
@@ -87,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
         List list = new LinkedList(map.entrySet());
         Collections.sort(list, new Comparator() {
             public int compare(Object o1, Object o2) {
-                return ((Comparable) ((Map.Entry) (o2)).getValue())
-                        .compareTo(((Map.Entry) (o1)).getValue());
+                return ((Comparable) ((Map.Entry) (o1)).getValue())
+                        .compareTo(((Map.Entry) (o2)).getValue());
             }
         });
 
