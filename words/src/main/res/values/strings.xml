@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Words</string>
+    <string name="button_text">Lookup Word Occurrences</string>
+</resources>
